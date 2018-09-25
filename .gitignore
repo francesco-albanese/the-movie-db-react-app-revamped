@@ -1,2 +1,8 @@
-node_modules
+# dependencies
+/node_modules
+
+# yarn
 yarn.lock
+
+# miscellaneous
+.DS_STORE
