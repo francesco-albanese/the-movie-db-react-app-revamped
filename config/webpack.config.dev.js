@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-
-=======
-'use strict';
->>>>>>> 7401e5893da90a7db088a41f41c2cd719e10d1b6
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-<<<<<<< HEAD
-=======
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
->>>>>>> 7401e5893da90a7db088a41f41c2cd719e10d1b6
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
