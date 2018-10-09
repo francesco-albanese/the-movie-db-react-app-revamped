@@ -1,0 +1,1 @@
+export { decorateClass } from './decorate-class'
