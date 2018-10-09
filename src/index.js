@@ -1,15 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
 import { CssBaseline } from '@material-ui/core'
-import registerServiceWorker from './registerServiceWorker'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
-import './main.scss'
+import { theme } from '#/styles/theme'
+
+import App from '#/App'
+
+import registerServiceWorker from '#/registerServiceWorker'
+
+import '#/styles/main.scss'
 
 const app = (
   <React.Fragment>
     <CssBaseline />
-    <App />
+    <MuiThemeProvider theme={ theme }>
+      <App />
+    </MuiThemeProvider>
   </React.Fragment>
 )
 
