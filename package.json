@@ -96,7 +96,7 @@
     "test:hook": "npm test -- --forceExit",
     "stylelint": "stylelint \"./src/**/*.scss\" --config \"config/stylelint/stylelintrc.js\"",
     "stylelint:fix": "npm run stylelint -- --fix",
-    "prepush": "npm run stylelint:fix && npm run eslint:fix && npm run test:hook"
+    "prepush-hook": "npm run stylelint:fix && npm run eslint:fix && npm run test:hook"
   },
   "jest": {
     "collectCoverageFrom": [
