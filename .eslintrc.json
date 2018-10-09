@@ -1,0 +1,144 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "semi": [
+      2,
+      "never"
+    ],
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "array-bracket-spacing": [
+      2,
+      "always",
+      {
+        "arraysInArrays": false,
+        "objectsInArrays": false
+      }
+    ],
+    "computed-property-spacing": [
+      2,
+      "always"
+    ],
+    "object-curly-spacing": [
+      2,
+      "always",
+      {
+        "arraysInObjects": false,
+        "objectsInObjects": false
+      }
+    ],
+    "space-before-function-paren": [
+      2,
+      "never"
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "jsx-quotes": [
+      2,
+      "prefer-double"
+    ],
+    "react/jsx-curly-spacing": [
+      2,
+      "always",
+      {
+        "allowMultiline": true,
+        "children": true,
+        "spacing": {
+          "objectLiterals": "never"
+        }
+      }
+    ],
+    "react/jsx-tag-spacing": [
+      2,
+      {
+        "closingSlash": "never",
+        "beforeSelfClosing": "always",
+        "afterOpening": "never",
+        "beforeClosing": "never"
+      }
+    ],
+    "react/sort-comp": [
+      0,
+      {
+        "order": [
+          "static-methods",
+          "lifecycle",
+          "/^on.+$/",
+          "getters",
+          "setters",
+          "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
+          "everything-else",
+          "/^render.+$/",
+          "render"
+        ]
+      }
+    ],
+    "sort-imports": [
+      0,
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": [
+          "none",
+          "all",
+          "multiple",
+          "single"
+        ]
+      }
+    ],
+    "keyword-spacing": 1,
+    "no-debugger": [
+      1
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1,
+        "ObjectExpression": 1
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.test.js",
+        "src/**/*.fixtures.js"
+      ],
+      "globals": {
+        "React": false,
+        "renderer": false,
+        "render": false,
+        "shallow": false,
+        "mount": false
+      }
+    },
+    {
+      "files": [
+        "src/**/*.stories.js"
+      ],
+      "globals": {
+        "alignment": false,
+        "codeStyles": false,
+        "colors": false,
+        "contexts": false,
+        "directions": false,
+        "getActions": false,
+        "getImage": false,
+        "getIsMobile": false,
+        "levels": false,
+        "positions": false,
+        "sizes": false,
+        "textTransforms": false,
+        "weights": false
+      }
+    }
+  ]
+}
