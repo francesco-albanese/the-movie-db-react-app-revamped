@@ -18,11 +18,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^3.1.2",
+    "@material-ui/icons": "^3.0.1",
     "autoprefixer": "^9.1.5",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.18",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react-app": "^5.0.1",
     "babel-runtime": "^6.26.0",
@@ -85,12 +90,13 @@
   "scripts": {
     "start": "node config/scripts/start.js",
     "build": "node config/scripts/build.js",
-    "eslint": "eslint --max-warnings 0 --rulesdir config/eslint ./src",
+    "eslint": "eslint --max-warnings 0 ./src",
     "eslint:fix": "npm run eslint -- --fix",
     "test": "node config/scripts/test.js --env=jsdom",
     "test:hook": "npm test -- --forceExit",
     "stylelint": "stylelint \"./src/**/*.scss\" --config \"config/stylelint/stylelintrc.js\"",
-    "stylelint:fix": "npm run stylelint -- --fix"
+    "stylelint:fix": "npm run stylelint -- --fix",
+    "prepush": "npm run stylelint:fix && npm run eslint:fix && npm run test:hook"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -128,11 +134,6 @@
       "jsx",
       "node",
       "mjs"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
     ]
   },
   "eslintConfig": {
