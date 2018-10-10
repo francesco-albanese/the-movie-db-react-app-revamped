@@ -8,6 +8,7 @@ class App extends Component {
   render() {
     const { width } = this.props
     const isMobile = getIsMobile(width)
+    console.log(process.env)
 
     return (
       <div>

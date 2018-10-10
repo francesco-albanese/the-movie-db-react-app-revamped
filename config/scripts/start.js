@@ -11,7 +11,7 @@ process.on('unhandledRejection', err => {
 })
 
 // Ensure environment variables are read.
-require('../env')
+require('../env/env')
 
 const fs = require('fs')
 const chalk = require('chalk')
@@ -26,7 +26,7 @@ const {
   prepareUrls
 } = require('react-dev-utils/WebpackDevServerUtils')
 const openBrowser = require('react-dev-utils/openBrowser')
-const paths = require('../paths')
+const paths = require('../env/paths')
 const config = require('../webpack/webpack.config.dev')
 const createDevServerConfig = require('../webpack/webpackDevServer.config')
 
