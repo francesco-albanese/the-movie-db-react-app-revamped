@@ -1,7 +1,8 @@
 import { flowRight } from 'lodash-es'
 
 /**
- * @param Array of Functions decorators 
+ * @param decorators {Array}  - Function decorators 
+ * @param component {Class}   - React component to decorate
  */
 
 export const decorateClass = (decorators = [], component) => {
