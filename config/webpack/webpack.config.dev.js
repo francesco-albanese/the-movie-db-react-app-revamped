@@ -29,7 +29,7 @@ module.exports = {
   mode: 'development',
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
@@ -85,7 +85,8 @@ module.exports = {
     // for React Native Web.
     extensions: [ '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx' ],
     alias: {
-      '#': path.resolve(__dirname, src)
+      '#': path.resolve(__dirname, src),
+      '#utils': path.resolve(__dirname, src, 'utils')
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
