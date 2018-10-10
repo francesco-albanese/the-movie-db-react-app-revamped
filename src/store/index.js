@@ -19,7 +19,7 @@ const middlewares = () => {
   ]
 
   if (process.env.NODE_ENV === 'development') {
-    middlewares.concat(logger)
+    middlewares.push(logger)
   }
 
   return middlewares
@@ -34,7 +34,7 @@ const enhancers = () => {
     &&
     isFunction(devToolExtension)
   ) {
-    enhancers.concat(devToolExtension())
+    enhancers.push(devToolExtension())
   }
 
   return enhancers
@@ -50,16 +50,22 @@ class Store {
     this.store = store
   }
 
-  getState() {
+  getState = () => {
     return this.store.getState()
+  }
+
+  getStore = () => {
+    return this.store
   }
 }
 
-// exporting a singleton so every component have access to the same store instance
-export const store = new Store(
+const store = new Store(
   createStore(
     reducers, 
     initialState, 
     composedEnhancers
   )
 )
+
+// exporting one instance of the store only
+export default store.getStore()
