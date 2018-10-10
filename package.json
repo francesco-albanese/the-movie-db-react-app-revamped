@@ -1,6 +1,7 @@
 {
-  "name": "the-movie-db-react-app",
+  "name": "@themoviedb/the-movie-db-react-app",
   "version": "1.0.0",
+  "main": "build/index.js",
   "private": true,
   "description": "Progressive web app powered by React, Redux and Material UI 💪🏻🤹‍♂",
   "dependencies": {
