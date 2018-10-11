@@ -3,15 +3,14 @@ import { render } from 'react-dom'
 import { CssBaseline } from '@material-ui/core'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
-
-import { theme } from '#styles/theme'
-import store from '#store'
-
-import App from '#/App'
+import store from '@themoviedb/the-movie-db-store'
 
 import registerServiceWorker from '#/registerServiceWorker'
 
+import { theme } from '#styles/theme'
 import '#styles/main.scss'
+
+import App from '#/App'
 
 const app = (
   <React.Fragment>
