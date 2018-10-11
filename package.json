@@ -1,10 +1,10 @@
 {
-  "name": "the-movie-db-react-app",
+  "name": "@themoviedb/the-movie-db-react-app",
   "version": "1.0.0",
+  "main": "build/index.js",
   "private": true,
-  "description": "Progressive web app powered by React, Redux and Material UI 💪🏻😎",
+  "description": "Progressive web app powered by React, Redux and Material UI 💪🏻🤹‍♂",
   "dependencies": {
-    "axios": "^0.18.0",
     "classcat": "^3.2.3",
     "lodash-es": "^4.17.11",
     "react": "^16.5.2",
@@ -12,6 +12,8 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
+    "redux-form": "^7.4.2",
+    "redux-logger": "^3.0.6",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1"
