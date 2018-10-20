@@ -7,6 +7,7 @@ import { decorateClass, getIsMobile } from '#utils'
 
 import { 
   fetchAllLocales, 
+  fetchAllPages,
   fetchAllTemplates,
   getAllLocales,
   getAllTemplates
@@ -15,11 +16,17 @@ import {
 class App extends Component {
 
   async componentDidMount() {
-    const { fetchAllLocales, fetchAllTemplates } = this.props
+    const { 
+      fetchAllLocales, 
+      fetchAllPages,
+      fetchAllTemplates 
+    } = this.props
+
+    await fetchAllLocales()
     
     await Promise.all([
-      fetchAllLocales(),
-      fetchAllTemplates()
+      fetchAllTemplates(),
+      fetchAllPages()
     ])
   }
 
@@ -42,6 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllLocales,
+  fetchAllPages,
   fetchAllTemplates
 }, dispatch)
 
