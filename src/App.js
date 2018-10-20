@@ -5,12 +5,16 @@ import { connect } from 'react-redux'
 
 import { decorateClass, getIsMobile } from '#utils'
 
+import { TmdbSpinner } from '#atoms'
+
 import { 
   fetchAllLocales, 
   fetchAllPages,
   fetchAllTemplates,
   getAllLocales,
-  getAllTemplates
+  getAllTemplates,
+  getPagesFetchingInprogress,
+  getTemplatesFetchingInprogress
 } from '@themoviedb/the-movie-db-store'
 
 class App extends Component {
@@ -31,19 +35,32 @@ class App extends Component {
   }
 
   render() {
-    const { width } = this.props
+    const { 
+      isPagesFetching,
+      isTemplatesFetching, 
+      width 
+    } = this.props
+
     const isMobile = getIsMobile(width)
 
-    return (
-      <div>
-        Test { isMobile ? 'true' : 'false' }
-      </div>
-    )
+    return isTemplatesFetching || isPagesFetching 
+      ? (
+        <TmdbSpinner 
+          className="tmdb-app-spinner"
+          size={ 70 } />
+      ) 
+      : (
+        <div>
+          Test { isMobile ? 'true' : 'false' }
+        </div>
+      )
   }
 }
 
 const mapStateToProps = state => ({
   allLocales: getAllLocales(state),
+  isPagesFetching: getPagesFetchingInprogress(state),
+  isTemplatesFetching: getTemplatesFetchingInprogress(state),
   templates: getAllTemplates(state)
 })
 
