@@ -85,6 +85,8 @@ module.exports = {
     extensions: [ '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx' ],
     alias: {
       '#': path.resolve(__dirname, src),
+      '#containers': path.resolve(__dirname, src, 'containers'),
+      '#components': path.resolve(__dirname, src, 'components'),
       '#atoms': path.resolve(__dirname, src, 'components', 'atoms'),
       '#molecules': path.resolve(__dirname, src, 'components', 'molecules'),
       '#organisms': path.resolve(__dirname, src, 'components', 'organisms'),
