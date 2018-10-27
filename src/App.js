@@ -48,9 +48,7 @@ class App extends Component {
 
     return isTemplatesFetching || isPagesFetching 
       ? (
-        <TmdbSpinner 
-          className="tmdb-app-spinner"
-          size={ 70 } />
+        <TmdbSpinner size={ 70 } />
       ) 
       : (
         <TmdbRouter>
