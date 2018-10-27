@@ -32,5 +32,14 @@ export const routesConfig = [
       loader: () => import('#containers/MovieDetailsPage'),
       ...reactLoadableDefaults
     })
+  },
+  {
+    reference: 'four-oh-four',
+    exact: true,
+    path: null,
+    component: Loadable({
+      loader: () => import('#containers/FourOhFourPage'),
+      ...reactLoadableDefaults
+    })
   }
 ]
