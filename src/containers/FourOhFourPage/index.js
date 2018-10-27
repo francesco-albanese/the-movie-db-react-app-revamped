@@ -1,7 +1,17 @@
 import React from 'react'
 
+import { RootPage } from '#FAC'
+
 export default class FourOhFourPageContainer extends React.Component {
   render() {
-    return 'this is from FourOhFour page container'
+    return (
+      <RootPage>
+        {
+          ({ isMobile }) => {
+            return 'this is from 404 page but within RootPage'
+          }
+        }
+      </RootPage>
+    )
   }
 }
