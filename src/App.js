@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import withWidth from '@material-ui/core/withWidth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { decorateClass, getIsMobile } from '#utils'
+import { decorateClass } from '#utils'
+import { TmdbRouter, Routes } from '@themoviedb/the-movie-db-react-routing'
+
+import { routesConfig } from '#router/routes.config'
 
 import { TmdbSpinner } from '#atoms'
 
@@ -12,6 +14,8 @@ import {
   fetchAllPages,
   fetchAllTemplates,
   getAllLocales,
+  getAllPages,
+  getActiveLocale,
   getAllTemplates,
   getPagesFetchingInprogress,
   getTemplatesFetchingInprogress
@@ -36,12 +40,11 @@ class App extends Component {
 
   render() {
     const { 
+      activeLocale,
+      allPages,
       isPagesFetching,
-      isTemplatesFetching, 
-      width 
+      isTemplatesFetching
     } = this.props
-
-    const isMobile = getIsMobile(width)
 
     return isTemplatesFetching || isPagesFetching 
       ? (
@@ -50,15 +53,20 @@ class App extends Component {
           size={ 70 } />
       ) 
       : (
-        <div>
-          Test { isMobile ? 'true' : 'false' }
-        </div>
+        <TmdbRouter>
+          <Routes
+            activeLocale={ activeLocale }
+            pages={ allPages }
+            routesConfig={ routesConfig } />
+        </TmdbRouter>
       )
   }
 }
 
 const mapStateToProps = state => ({
+  activeLocale: getActiveLocale(state),
   allLocales: getAllLocales(state),
+  allPages: getAllPages(state),
   isPagesFetching: getPagesFetchingInprogress(state),
   isTemplatesFetching: getTemplatesFetchingInprogress(state),
   templates: getAllTemplates(state)
@@ -71,6 +79,5 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 export default decorateClass([
-  withWidth({ withTheme: true }),
   connect(mapStateToProps, mapDispatchToProps)
 ], App)
