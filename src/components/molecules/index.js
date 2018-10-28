@@ -1,0 +1,1 @@
+export { TmdbMenuItem } from './TmdbMenuItem'
