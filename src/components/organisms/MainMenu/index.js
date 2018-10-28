@@ -4,6 +4,7 @@ import { TmdbAvatar } from '#atoms'
 import { MenuList } from '@material-ui/core'
 
 import { TmdbMenuItem } from '#molecules'
+import { TmdbLanguageSelector } from '#organisms'
 
 import logoDesktop from '#assets/logo-desktop.svg'
 
@@ -28,10 +29,17 @@ export const MainMenu = ({ sections, ...otherProps }) => {
 
   const HomeSection = get(sections, 'HomeLink.Home')
   const FavouriteSection = get(sections, 'FavouritesLink.Favourites')
-  const isHomePage = activePage.reference.includes('home')
-  const isFavouritePage = activePage.reference.includes('favourites')
+  const LanguageSelectorSection = get(sections, 'LanguageSelector.LanguageSelectorText')
 
-  return !isEmpty(sections) 
+  const isHomePage = activePage && 
+    activePage.reference && 
+    activePage.reference.includes('home')
+    
+  const isFavouritePage = activePage && 
+    activePage.reference &&
+    activePage.reference.includes('favourites')
+
+  return !isEmpty(sections) && !isEmpty(activePage)
     ? (
       <div className="tmdb-main-menu">
         <TmdbAvatar 
@@ -58,6 +66,10 @@ export const MainMenu = ({ sections, ...otherProps }) => {
               section={ FavouriteSection } />
           }
         </MenuList>
+
+        <TmdbLanguageSelector 
+          section={ LanguageSelectorSection } 
+          { ...otherProps } />
       </div>
     )
     : null
