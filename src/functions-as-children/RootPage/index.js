@@ -21,10 +21,6 @@ class RootPage extends React.Component {
     children: PropTypes.func.isRequired
   }
 
-  state = {
-    location: {}
-  }
-
   get404page = () => {
     const { allPages } = this.props
 

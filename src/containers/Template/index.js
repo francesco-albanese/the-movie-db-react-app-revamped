@@ -5,10 +5,12 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { isEmpty, isEqual } from 'lodash-es'
 
+import { LocalizePage } from '#FAC'
+
 import { 
   getActiveLocale, 
   getActivePage, 
-  getAllLocales 
+  getAllLocales
 } from '@themoviedb/the-movie-db-store'
 
 import { decorateClass, getIsMobile } from '#utils'
@@ -39,18 +41,28 @@ class TemplateContainer extends React.Component {
 
     return null
   }
-  
 
   render() {
 
     const { width } = this.props
     const isMobile = getIsMobile(width)
     const { isDynamicPage } = this.state
-
+    
     return (
-      <Main { ...this.props } 
-        isDynamicPage={ isDynamicPage }
-        isMobile={ isMobile } />
+
+      <LocalizePage>
+        { 
+          ({ setActiveLocale }) => {
+            return (
+              <Main 
+                { ...this.props }
+                isDynamicPage={ isDynamicPage }
+                setActiveLocale={ setActiveLocale }
+                isMobile={ isMobile } />
+            )
+          } 
+        }
+      </LocalizePage>
     )
   }
 }
