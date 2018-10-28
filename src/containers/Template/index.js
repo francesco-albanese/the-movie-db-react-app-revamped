@@ -1,10 +1,15 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import withWidth from '@material-ui/core/withWidth'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { isEmpty, isEqual } from 'lodash-es'
 
-import { getActivePage } from '@themoviedb/the-movie-db-store'
+import { 
+  getActiveLocale, 
+  getActivePage, 
+  getAllLocales 
+} from '@themoviedb/the-movie-db-store'
 
 import { decorateClass, getIsMobile } from '#utils'
 
@@ -51,7 +56,9 @@ class TemplateContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  activePage: getActivePage(state)
+  activeLocale: getActiveLocale(state),
+  activePage: getActivePage(state),
+  allLocales: getAllLocales(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -60,5 +67,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 export default decorateClass([
   withWidth(),
+  withRouter,
   connect(mapStateToProps, mapDispatchToProps)
 ], TemplateContainer)
