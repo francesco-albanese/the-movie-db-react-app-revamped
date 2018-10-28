@@ -25,14 +25,15 @@ class RootPage extends React.Component {
     location: {}
   }
 
-  static get404page = allPages => {
+  get404page = () => {
+    const { allPages } = this.props
 
     const page404 = allPages.find(page => page.reference.includes('four-oh-four-page'))
 
     return page404
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  componentDidMount() {
 
     const { 
       activeLocale,
@@ -41,37 +42,29 @@ class RootPage extends React.Component {
       location, 
       match,
       setActivePage 
-    } = nextProps
+    } = this.props
 
-    if (location.pathname !== prevState.location.pathname) {
-      if (location.pathname === '/') {
-        /**
-         * this is to prevent 404 page
-         * from being set by default
-         * if url is visited without
-         * valid locale (en|it)
-         */
-        history.push(activeLocale.path)
-      }
-  
-      const pagePath = isEmpty(match.params) 
-        ? location.pathname
-        : match.path
-  
-      const page = allPages.find(page => page.paths[ activeLocale.code ] === pagePath)
-  
-      if (page) {
-        setActivePage(page)
-      } else {
-        setActivePage(RootPage.get404page(allPages))
-      }
-
-      return {
-        location
-      }
+    if (location.pathname === '/') {
+      /**
+       * this is to prevent 404 page
+       * from being set by default
+       * if url is visited without
+       * valid locale (en|it)
+       */
+      history.push(activeLocale.path)
     }
 
-    return null
+    const pagePath = isEmpty(match.params) 
+      ? location.pathname
+      : match.path
+
+    const page = allPages.find(page => page.paths[ activeLocale.code ] === pagePath)
+
+    if (page) {
+      setActivePage(page)
+    } else {
+      setActivePage(this.get404page())
+    }
   }
 
 
