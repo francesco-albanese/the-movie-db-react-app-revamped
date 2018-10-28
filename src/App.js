@@ -78,7 +78,7 @@ class App extends React.Component {
 
     return isTemplatesFetching || isPagesFetching 
       ? (
-        <TmdbSpinner size={ 70 } />
+        <TmdbSpinner />
       ) 
       : (
         <TmdbRouter>
