@@ -22,18 +22,18 @@ class RootPage extends React.Component {
   }
 
   state = {
-
+    location: {}
   }
 
-  get404page = () => {
-    const { allPages } = this.props
+  static get404page = allPages => {
 
     const page404 = allPages.find(page => page.reference.includes('four-oh-four-page'))
 
     return page404
   }
 
-  componentDidMount() {
+  static getDerivedStateFromProps(nextProps, prevState) {
+
     const { 
       activeLocale,
       allPages,
@@ -41,29 +41,37 @@ class RootPage extends React.Component {
       location, 
       match,
       setActivePage 
-    } = this.props
+    } = nextProps
 
-    if (location.pathname === '/') {
-      /**
-       * this is to prevent 404 page
-       * from being set by default
-       * if url is visited without
-       * valid locale (en|it)
-       */
-      history.push(activeLocale.path)
+    if (location.pathname !== prevState.location.pathname) {
+      if (location.pathname === '/') {
+        /**
+         * this is to prevent 404 page
+         * from being set by default
+         * if url is visited without
+         * valid locale (en|it)
+         */
+        history.push(activeLocale.path)
+      }
+  
+      const pagePath = isEmpty(match.params) 
+        ? location.pathname
+        : match.path
+  
+      const page = allPages.find(page => page.paths[ activeLocale.code ] === pagePath)
+  
+      if (page) {
+        setActivePage(page)
+      } else {
+        setActivePage(RootPage.get404page(allPages))
+      }
+
+      return {
+        location
+      }
     }
 
-    const pagePath = isEmpty(match.params) 
-      ? location.pathname
-      : match.path
-
-    const page = allPages.find(page => page.paths[ activeLocale.code ] === pagePath)
-
-    if (page) {
-      setActivePage(page)
-    } else {
-      setActivePage(this.get404page())
-    }
+    return null
   }
 
 
@@ -73,7 +81,7 @@ class RootPage extends React.Component {
       children, 
       width 
     } = this.props
-
+    
     const isMobile = getIsMobile(width)
     const sections = isEmpty(activePage) 
       ? {}
@@ -81,7 +89,8 @@ class RootPage extends React.Component {
 
     return children({
       isMobile,
-      sections
+      sections,
+      ...this.props
     })
   }
 }
