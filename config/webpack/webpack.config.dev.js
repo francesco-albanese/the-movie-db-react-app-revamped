@@ -75,6 +75,7 @@ module.exports = {
     extensions: [ '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx' ],
     alias: {
       '#': path.resolve(__dirname, src),
+      '#assets': path.resolve(__dirname, src, 'assets'),
       '#containers': path.resolve(__dirname, src, 'containers'),
       '#components': path.resolve(__dirname, src, 'components'),
       '#FAC': path.resolve(__dirname, src, 'functions-as-children'),
