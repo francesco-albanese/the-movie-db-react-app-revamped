@@ -83,6 +83,7 @@ module.exports = {
       '#molecules': path.resolve(__dirname, src, 'components', 'molecules'),
       '#organisms': path.resolve(__dirname, src, 'components', 'organisms'),
       '#pages': path.resolve(__dirname, src, 'components', 'pages'),
+      '#portals': path.resolve(__dirname, src, 'components', 'portals'),
       '#templates': path.resolve(__dirname, src, 'components', 'templates'),
       '#router': path.resolve(__dirname, src, 'router'),
       '#store': path.resolve(__dirname, src, 'store'),
