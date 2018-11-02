@@ -2,7 +2,7 @@ import Loadable from 'react-loadable'
 
 import { TmdbSpinner } from '#atoms'
 
-const reactLoadableDefaults = {
+export const reactLoadableDefaults = {
   delay: 300,
   loading: TmdbSpinner,
   timeout: 5000
