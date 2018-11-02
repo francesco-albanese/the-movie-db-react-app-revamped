@@ -12,19 +12,19 @@ describe('getLocaleFromURL', () => {
   it('returns default locale if locale not found in the url', () => {
     const activeLocale = allLocales[ 0 ]
     const result = getLocaleFromURL({ allLocales, activeLocale, pathname: '/fake-page' })
-    expect(result).toEquale(expect.objectContaining(activeLocale))
+    expect(result).toEqual(expect.objectContaining(activeLocale))
   })
 
   it('returns italian if /it found in url', () => {
     const activeLocale = allLocales[ 1 ]
     const result = getLocaleFromURL({ allLocales, activeLocale, pathname: '/it/favoriti' })
-    expect(result).toEquale(expect.objectContaining(activeLocale))
+    expect(result).toEqual(expect.objectContaining(activeLocale))
   })
   
   it('returns english if /en found in url', () => {
     const activeLocale = allLocales[ 0 ]
     const result = getLocaleFromURL({ allLocales, activeLocale, pathname: '/en/favourites' })
-    expect(result).toEquale(expect.objectContaining(activeLocale))
+    expect(result).toEqual(expect.objectContaining(activeLocale))
   })
 
 })
