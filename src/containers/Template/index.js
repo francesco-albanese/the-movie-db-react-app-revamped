@@ -6,11 +6,13 @@ import { connect } from 'react-redux'
 import { isEmpty, isEqual } from 'lodash-es'
 
 import { LocalizePage } from '#FAC'
+import { portalNames } from '#portals/TmdbPortal/portals.config'
 
 import { 
   getActiveLocale, 
   getActivePage, 
-  getAllLocales
+  getAllLocales,
+  openPortal
 } from '@themoviedb/the-movie-db-store'
 
 import { decorateClass, getIsMobile } from '#utils'
@@ -74,7 +76,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  openMainMenuPortal: () => openPortal(portalNames.mainMenu)
 }, dispatch)
 
 export default decorateClass([
