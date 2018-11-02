@@ -24,7 +24,11 @@ export class TmdbLanguageSelector extends React.Component {
   }
 
   handleChange = event => {
-    const { allLocales, setActiveLocale } = this.props
+    const { 
+      allLocales, 
+      closeMainMenuPortal, 
+      setActiveLocale 
+    } = this.props
 
     this.setState({ [ event.target.name ]: event.target.value }, () => {
       if (isFunction(setActiveLocale)) {
@@ -32,6 +36,10 @@ export class TmdbLanguageSelector extends React.Component {
           locale.code.includes(event.target.value)
         )
         setActiveLocale(locale)
+      }
+
+      if (isFunction(closeMainMenuPortal)) {
+        closeMainMenuPortal()
       }
     })
   }
