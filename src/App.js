@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { get } from 'lodash-es'
+
 
 import { decorateClass } from '#utils'
 import { TmdbRouter, Routes } from '@themoviedb/the-movie-db-react-routing'
@@ -8,6 +11,7 @@ import { TmdbRouter, Routes } from '@themoviedb/the-movie-db-react-routing'
 import { routesConfig } from '#router/routes.config'
 
 import { TmdbSpinner } from '#atoms'
+import Template from '#containers/Template'
 
 import { 
   fetchAllLocales, 
@@ -21,7 +25,30 @@ import {
   getTemplatesFetchingInprogress
 } from '@themoviedb/the-movie-db-store'
 
-class App extends Component {
+class App extends React.Component {
+
+  static propTypes = {
+    isTemplatesFetching: PropTypes.bool,
+    isPagesFetching: PropTypes.bool,
+    activeLocale: PropTypes.shape({
+      code: PropTypes.string,
+      default: PropTypes.bool,
+      name: PropTypes.string,
+      path: PropTypes.string
+    }),
+    allPages: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      paths: PropTypes.object,
+      reference: PropTypes.string,
+      sections: PropTypes.object
+    })),
+    templates: PropTypes.arrayOf(PropTypes.shape({
+      sections: PropTypes.object
+    })),
+    fetchAllLocales: PropTypes.func,
+    fetchAllTemplates: PropTypes.func,
+    fetchAllPages: PropTypes.func
+  }
 
   async componentDidMount() {
     const { 
@@ -43,19 +70,24 @@ class App extends Component {
       activeLocale,
       allPages,
       isPagesFetching,
-      isTemplatesFetching
+      isTemplatesFetching,
+      templates
     } = this.props
+
+    const templateSections = get(templates, '[0].sections')
 
     return isTemplatesFetching || isPagesFetching 
       ? (
-        <TmdbSpinner size={ 70 } />
+        <TmdbSpinner />
       ) 
       : (
         <TmdbRouter>
-          <Routes
-            activeLocale={ activeLocale }
-            pages={ allPages }
-            routesConfig={ routesConfig } />
+          <Template sections={ templateSections }>
+            <Routes
+              activeLocale={ activeLocale }
+              pages={ allPages }
+              routesConfig={ routesConfig } />
+          </Template>
         </TmdbRouter>
       )
   }

@@ -6,12 +6,18 @@ import { withRouter } from 'react-router-dom'
 import { isEmpty } from 'lodash-es'
 import PropTypes from 'prop-types'
 
-import { decorateClass, getIsMobile } from '#utils'
+import { 
+  decorateClass, 
+  getIsMobile,
+  getLocaleFromURL
+} from '#utils'
 
 import {
   getAllPages,
   getActiveLocale,
   getActivePage,
+  getAllLocales,
+  setActiveLocale,
   setActivePage
 } from '@themoviedb/the-movie-db-store'
 
@@ -19,10 +25,6 @@ class RootPage extends React.Component {
 
   static propTypes = {
     children: PropTypes.func.isRequired
-  }
-
-  state = {
-
   }
 
   get404page = () => {
@@ -34,13 +36,16 @@ class RootPage extends React.Component {
   }
 
   componentDidMount() {
+
     const { 
       activeLocale,
+      allLocales,
       allPages,
       history, 
       location, 
       match,
-      setActivePage 
+      setActivePage,
+      setActiveLocale
     } = this.props
 
     if (location.pathname === '/') {
@@ -51,6 +56,20 @@ class RootPage extends React.Component {
        * valid locale (en|it)
        */
       history.push(activeLocale.path)
+    }
+
+    if (history.action === 'POP') {
+      const { pathname } = location
+
+      const localeFromURL = getLocaleFromURL({
+        allLocales,
+        activeLocale,
+        pathname
+      })
+
+      if (localeFromURL) {
+        setActiveLocale(localeFromURL)
+      }
     }
 
     const pagePath = isEmpty(match.params) 
@@ -73,7 +92,7 @@ class RootPage extends React.Component {
       children, 
       width 
     } = this.props
-
+    
     const isMobile = getIsMobile(width)
     const sections = isEmpty(activePage) 
       ? {}
@@ -81,7 +100,8 @@ class RootPage extends React.Component {
 
     return children({
       isMobile,
-      sections
+      sections,
+      ...this.props
     })
   }
 }
@@ -89,11 +109,13 @@ class RootPage extends React.Component {
 const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   activePage: getActivePage(state),
+  allLocales: getAllLocales(state),
   allPages: getAllPages(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setActivePage
+  setActivePage,
+  setActiveLocale
 }, dispatch)
 
 export default decorateClass([

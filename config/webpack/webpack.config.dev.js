@@ -75,6 +75,7 @@ module.exports = {
     extensions: [ '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx' ],
     alias: {
       '#': path.resolve(__dirname, src),
+      '#assets': path.resolve(__dirname, src, 'assets'),
       '#containers': path.resolve(__dirname, src, 'containers'),
       '#components': path.resolve(__dirname, src, 'components'),
       '#FAC': path.resolve(__dirname, src, 'functions-as-children'),
@@ -82,6 +83,7 @@ module.exports = {
       '#molecules': path.resolve(__dirname, src, 'components', 'molecules'),
       '#organisms': path.resolve(__dirname, src, 'components', 'organisms'),
       '#pages': path.resolve(__dirname, src, 'components', 'pages'),
+      '#portals': path.resolve(__dirname, src, 'portals'),
       '#templates': path.resolve(__dirname, src, 'components', 'templates'),
       '#router': path.resolve(__dirname, src, 'router'),
       '#store': path.resolve(__dirname, src, 'store'),
