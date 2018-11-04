@@ -79,6 +79,7 @@ module.exports = {
       '#containers': path.resolve(__dirname, src, 'containers'),
       '#components': path.resolve(__dirname, src, 'components'),
       '#FAC': path.resolve(__dirname, src, 'functions-as-children'),
+      '#hoc': path.resolve(__dirname, src, 'hoc'),
       '#atoms': path.resolve(__dirname, src, 'components', 'atoms'),
       '#molecules': path.resolve(__dirname, src, 'components', 'molecules'),
       '#organisms': path.resolve(__dirname, src, 'components', 'organisms'),
