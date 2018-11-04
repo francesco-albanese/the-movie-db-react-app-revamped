@@ -3,8 +3,12 @@
  */
 
 .tmdb-main-menu {
+  .tmdb-avatar {
+    border-radius: 0;
+    margin: auto;
+  }
+
   .tmdb-avatar-desktop {
     width: 100px;
-    border-radius: 0;
   }
 }

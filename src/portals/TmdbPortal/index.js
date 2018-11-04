@@ -37,6 +37,11 @@ class TmdbPortal extends React.Component {
     document.body.append(this.portalNode)
   }
 
+  componentWillUnmount() {
+    document.body.contains(this.portalNode) && 
+    document.body.removeChild(this.portalNode)
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
 
     const { allPortals } = nextProps

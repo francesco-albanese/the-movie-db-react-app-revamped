@@ -6,26 +6,29 @@ import {
   MenuItem,
   Select
 } from '@material-ui/core'
-import { get, isFunction } from 'lodash-es'
+import { 
+  get, 
+  isNumber,
+  isFunction 
+} from 'lodash-es'
 
-export default class TmdbLanguageSelector extends React.Component {
+export default class TmdbGenreSelector extends React.Component {
 
   state = {
-    activeLocale: {},
     open: false,
-    language: this.props.activeLocale.code
+    genre: ''
   }
+  
+  componentDidUpdate(prevProps) {
+    const { clearSelectedFilter } = this.props
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { activeLocale } = nextProps
-
-    if (activeLocale.code !== prevState.activeLocale.code) {
-      return {
-        language: activeLocale.code
-      }
+    if (
+      clearSelectedFilter !== prevProps.clearSelectedFilter
+      &&
+      clearSelectedFilter
+    ) {
+      this.setState({ genre: '' })
     }
-
-    return null
   }
   
 
@@ -39,17 +42,17 @@ export default class TmdbLanguageSelector extends React.Component {
 
   handleChange = event => {
     const { 
-      allLocales, 
       closeMainMenuPortal, 
-      setActiveLocale 
+      filterMoviesById, 
+      onSelectChange 
     } = this.props
 
     this.setState({ [ event.target.name ]: event.target.value }, () => {
-      if (isFunction(setActiveLocale)) {
-        const locale = allLocales.find(locale => 
-          locale.code.includes(event.target.value)
-        )
-        setActiveLocale(locale)
+      if (isFunction(filterMoviesById)) {
+        filterMoviesById(event.target.value)
+      }
+      if (isFunction(onSelectChange)) {
+        onSelectChange()
       }
 
       if (isFunction(closeMainMenuPortal)) {
@@ -60,6 +63,7 @@ export default class TmdbLanguageSelector extends React.Component {
 
   renderButton = () => {
     const { activeLocale, section } = this.props
+
     const lineOne = get(section, 'lineOne')
 
     return (
@@ -71,27 +75,34 @@ export default class TmdbLanguageSelector extends React.Component {
 
   renderInputLabel = () => {
     const { activeLocale, section } = this.props
+    const { genre } = this.state
+
+    const lineOne = get(section, 'lineOne')
     const lineTwo = get(section, 'lineTwo')
+
+    const label = !isNumber(genre)
+      ? lineOne[ activeLocale.code ]
+      : lineTwo[ activeLocale.code ]
 
     return (
       <InputLabel htmlFor="controlled-open-select">
-        { lineTwo[ activeLocale.code ] }
+        { label }
       </InputLabel>
     )
   }
 
   renderSelect = () => {
-    const { open, language } = this.state
+    const { open, genre } = this.state
 
     return (
       <Select
         open={ open }
         onClose={ this.handleClose }
         onOpen={ this.handleOpen }
-        value={ language }
+        value={ genre }
         onChange={ this.handleChange }
         inputProps={{
-          name: 'language',
+          name: 'genre',
           id: 'controlled-open-select'
         }}>
         { this.renderMenuItems() }
@@ -100,17 +111,13 @@ export default class TmdbLanguageSelector extends React.Component {
   }
 
   renderMenuItems = () => {
-    const { allLocales } = this.props
+    const { genres } = this.props
 
-    return allLocales.map(({ code }) => {
-      
-      const label = code.includes('en')
-        ? `🇬🇧 ${ code.toUpperCase() }`
-        : `🇮🇹 ${ code.toUpperCase() }`
+    return genres.map(({ id, name }) => {
 
       return (
-        <MenuItem key={ code } value={ code }>
-          { label }
+        <MenuItem key={ id } value={ id }>
+          { name }
         </MenuItem>
       )
     })

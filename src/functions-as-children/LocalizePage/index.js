@@ -7,9 +7,12 @@ import { withRouter } from 'react-router-dom'
 import { decorateClass, getLocaleFromURL } from '#utils'
 
 import { 
+  fetchAllMovies,
+  fetchGenres,
   getActivePage, 
   getActiveLocale,
   getAllLocales,
+  getMovieCategory,
   setActiveLocale
 } from '@themoviedb/the-movie-db-store'
 
@@ -19,7 +22,22 @@ class LocalizePage extends React.Component {
     children: PropTypes.func.isRequired
   }
 
-  dispatchActiveLocale = payload => {
+  updateEntriesWithCurrentLocale = ({ code }) => {
+    const { 
+      activePage,
+      fetchAllMovies,
+      fetchGenres,
+      movieCategory 
+    } = this.props
+
+    if (activePage.reference.includes('home')) {
+      fetchGenres(code)
+      fetchAllMovies(movieCategory, code)
+    }
+
+  }
+
+  dispatchActiveLocale = async payload => {
     const { 
       activeLocale,
       activePage,
@@ -53,7 +71,8 @@ class LocalizePage extends React.Component {
       })
 
       if (localeFromURL) {
-        return this.dispatchActiveLocale(localeFromURL)
+        this.dispatchActiveLocale(localeFromURL)
+        this.updateEntriesWithCurrentLocale(localeFromURL)
       }
     }
   }
@@ -78,10 +97,13 @@ class LocalizePage extends React.Component {
 const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   activePage: getActivePage(state),
-  allLocales: getAllLocales(state)
+  allLocales: getAllLocales(state),
+  movieCategory: getMovieCategory(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchAllMovies,
+  fetchGenres,
   setActiveLocale
 }, dispatch)
 

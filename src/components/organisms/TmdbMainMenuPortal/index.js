@@ -5,7 +5,7 @@ import { TmdbDrawer } from '#atoms'
 import { TmdbMainMenu } from '#organisms'
 
 
-export default class MainMenuPortal extends React.Component {
+export default class TmdbMainMenuPortal extends React.Component {
   render() {
     const { 
       closeMainMenuPortal,

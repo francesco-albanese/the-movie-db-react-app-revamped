@@ -9,10 +9,13 @@ import { LocalizePage } from '#FAC'
 import { portalNames } from '#portals/TmdbPortal/portals.config'
 
 import { 
+  filterMoviesById,
   getActiveLocale, 
   getActivePage, 
+  getAllGenres,
   getAllLocales,
-  openPortal
+  openPortal,
+  setMovieCategory
 } from '@themoviedb/the-movie-db-store'
 
 import { decorateClass, getIsMobile } from '#utils'
@@ -72,11 +75,14 @@ class TemplateContainer extends React.Component {
 const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   activePage: getActivePage(state),
-  allLocales: getAllLocales(state)
+  allLocales: getAllLocales(state),
+  genres: getAllGenres(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  openMainMenuPortal: () => openPortal(portalNames.mainMenu)
+  filterMoviesById,
+  openMainMenuPortal: () => openPortal(portalNames.mainMenu),
+  setMovieCategory
 }, dispatch)
 
 export default decorateClass([

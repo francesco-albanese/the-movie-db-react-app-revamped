@@ -10,7 +10,7 @@ export const portalsConfig = [
   {
     name: portalNames.mainMenu,
     component: Loadable({
-      loader: () => import('#portals/MainMenu'),
+      loader: () => import('#portals/TmdbMainMenu'),
       ...reactLoadableDefaults
     })
   }
