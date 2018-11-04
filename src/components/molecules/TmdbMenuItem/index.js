@@ -1,5 +1,5 @@
 import React from 'react'
-import { isFunction } from 'lodash-es'
+import { camelCase, isFunction } from 'lodash-es'
 import { NavLink } from 'react-router-dom'
 import { 
   ListItemIcon, 
@@ -12,11 +12,14 @@ export const TmdbMenuItem = ({
   activeLocale, 
   allLocales, 
   asLink,
-  closeMainMenuPortal, 
-  section 
+  closeMainMenuPortal,
+  onClick, 
+  section,
+  setMovieCategory 
 }) => {
 
   const { 
+    name,
     icon, 
     label, 
     path 
@@ -27,6 +30,12 @@ export const TmdbMenuItem = ({
 
   const closePortal = () => {
     isFunction(closeMainMenuPortal) && closeMainMenuPortal()
+  }
+
+  const handleClick = () => {
+    isFunction(onClick) && onClick()
+    isFunction(closeMainMenuPortal) && closeMainMenuPortal()
+    isFunction(setMovieCategory) && setMovieCategory(camelCase(name[ 'en' ]))
   }
 
   return asLink 
@@ -45,7 +54,7 @@ export const TmdbMenuItem = ({
       </NavLink>
     )
     : (
-      <MenuItem onClick={ closePortal }>
+      <MenuItem onClick={ handleClick }>
         <ListItemIcon>
           <Icon></Icon>
         </ListItemIcon>
