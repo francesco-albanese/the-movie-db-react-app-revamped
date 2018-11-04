@@ -8,12 +8,26 @@ import {
 } from '@material-ui/core'
 import { get, isFunction } from 'lodash-es'
 
-export class TmdbLanguageSelector extends React.Component {
+export default class TmdbLanguageSelector extends React.Component {
 
   state = {
+    activeLocale: {},
     open: false,
     language: this.props.activeLocale.code
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { activeLocale } = nextProps
+
+    if (activeLocale.code !== prevState.activeLocale.code) {
+      return {
+        language: activeLocale.code
+      }
+    }
+
+    return null
+  }
+  
 
   handleOpen = () => {
     this.setState({ open: true })
