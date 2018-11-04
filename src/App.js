@@ -54,7 +54,7 @@ class App extends React.Component {
     const { 
       fetchAllLocales, 
       fetchAllPages,
-      fetchAllTemplates 
+      fetchAllTemplates
     } = this.props
 
     await fetchAllLocales()
@@ -76,7 +76,7 @@ class App extends React.Component {
 
     const templateSections = get(templates, '[0].sections')
 
-    return isTemplatesFetching || isPagesFetching 
+    return isTemplatesFetching || isPagesFetching
       ? (
         <TmdbSpinner />
       ) 
