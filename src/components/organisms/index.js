@@ -1,3 +1,5 @@
-export { TmdbMainMenu } from './TmdbMainMenu'
-export { TmdbLanguageSelector } from './TmdbLanguageSelector'
-export { default as MainMenuPortal } from './MainMenuPortal'
+export { default as TmdbMainMenu } from './TmdbMainMenu'
+export { default as TmdbLanguageSelector } from './TmdbLanguageSelector'
+export { default as TmdbGenreSelector } from './TmdbGenreSelector'
+export { TmdbMoviesGrid } from './TmdbMoviesGrid'
+export { default as TmdbMainMenuPortal } from './TmdbMainMenuPortal'
