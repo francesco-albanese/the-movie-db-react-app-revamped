@@ -7,14 +7,17 @@ import { decorateClass, getIsMobile } from '#utils'
 
 import { 
   closePortal, 
+  filterMoviesById,
   getActiveLocale,
   getActivePage,
   getActivePortal,
-  getAllLocales
+  getAllGenres,
+  getAllLocales,
+  setMovieCategory
 } from '@themoviedb/the-movie-db-store'
 
 import { portalNames } from '#portals/TmdbPortal/portals.config'
-import { MainMenuPortal } from '#organisms'
+import { TmdbMainMenuPortal } from '#organisms'
 import { LocalizePage } from '#FAC'
 
 class MainMenuPortalContainer extends React.Component {
@@ -30,7 +33,7 @@ class MainMenuPortalContainer extends React.Component {
         { 
           ({ setActiveLocale }) => {
             return (
-              <MainMenuPortal 
+              <TmdbMainMenuPortal 
                 { ...this.props }
                 isMobile={ isMobile }
                 isOpen={ currentPortal.active }
@@ -48,11 +51,14 @@ const mapStateToProps = state => ({
   activePage: getActivePage(state),
   activeLocale: getActiveLocale(state),
   allLocales: getAllLocales(state),
-  currentPortal: getActivePortal(state)(portalNames.mainMenu)
+  currentPortal: getActivePortal(state)(portalNames.mainMenu),
+  genres: getAllGenres(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  closeMainMenuPortal: () => closePortal(portalNames.mainMenu)
+  closeMainMenuPortal: () => closePortal(portalNames.mainMenu),
+  filterMoviesById,
+  setMovieCategory
 }, dispatch)
 
 export default decorateClass([
