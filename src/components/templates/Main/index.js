@@ -28,10 +28,8 @@ export default ({ children, isMobile, ...otherProps }) => {
             <Header { ...otherProps } />
           </Grid>
         }
-
-        {
-          <TmdbPortal />
-        }
+        
+        <TmdbPortal />
 
         <Grid item xs={ 12 } md={ articleGridSize }>
           <article className="tmdb-page">{ children }</article>
