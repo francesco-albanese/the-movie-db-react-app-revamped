@@ -1,56 +1,55 @@
 import React from 'react'
 import { get, isEmpty } from 'lodash-es'
 
+import { TmdbSpinner } from '#atoms'
 import { TmdbMoviesGrid } from '#organisms'
-import { NoMoviesInSelectedGenre } from './sections/NoMoviesInSelectedGenre'
+import SearchForm from '#containers/SearchForm'
+import { NoMoviesAvailable } from './sections/NoMoviesAvailable'
 
 export default class HomePage extends React.Component {
 
-  state = {
-    movies: [],
-    moviesFiltered: false
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
+  render() {
     const { 
       allMovies, 
-      filteredMovies, 
-      moviesFiltered 
-    } = nextProps
+      isFiltering,
+      searchingInProgress,
+      sections 
+    } = this.props
 
-    if (!moviesFiltered) {
-      return {
-        movies: allMovies,
-        moviesFiltered
-      }
-    }
-
-    if (moviesFiltered && !isEmpty(filteredMovies)) {
-      return {
-        movies: filteredMovies,
-        moviesFiltered
-      }
-    }
-
-    return {
-      movies: []
-    }
-  }
-
-  render() {
-    const { movies } = this.state
-    const { sections } = this.props
+    const renderNoMoviesAvailable = 
+      (isFiltering && isEmpty(allMovies)) || 
+      isEmpty(allMovies)
 
     const NoMoviesInSelectedGenreSection = 
       get(sections, 'NoMoviesInGenre.NoMoviesInGenreText')
 
+    const NoMoviesWithQuerySection = 
+    get(sections, 'NoMoviesWithQuery.NoMoviesWithQueryText')
 
-    return !isEmpty(movies)
-      ? (
-        <TmdbMoviesGrid { ...this.props } movies={ movies } />
-      )
-      : <NoMoviesInSelectedGenre 
-        { ...this.props } 
-        section={ NoMoviesInSelectedGenreSection } />
+    const NoMoviesAvailableSections = { 
+      NoMoviesInSelectedGenreSection,
+      NoMoviesWithQuerySection
+    }
+
+    return (
+      <React.Fragment>
+
+        <SearchForm { ...this.props } />
+
+        {
+          renderNoMoviesAvailable &&
+          <NoMoviesAvailable 
+            { ...this.props } 
+            sections={ NoMoviesAvailableSections } />
+        }
+
+        { 
+          searchingInProgress 
+            ? <TmdbSpinner />
+            : <TmdbMoviesGrid { ...this.props } />
+        }
+
+      </React.Fragment>
+    )
   }
 }
