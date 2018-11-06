@@ -4,12 +4,13 @@ import {
   CardMedia, 
   Grid 
 } from '@material-ui/core' 
+import { isEmpty } from 'lodash-es'
 
-export const TmdbMoviesGrid = ({ movies = []}) => {
+export const TmdbMoviesGrid = ({ allMovies = []}) => {
 
   const renderGridItems = () => {
 
-    return movies.map(movie => {
+    return allMovies.map(movie => {
 
       const { 
         id, 
@@ -36,9 +37,11 @@ export const TmdbMoviesGrid = ({ movies = []}) => {
     })
   }
 
-  return (
-    <Grid container spacing={ 16 }>
-      { renderGridItems() }
-    </Grid>
-  )
+  return !isEmpty(allMovies)
+    ? (
+      <Grid container spacing={ 16 }>
+        { renderGridItems() }
+      </Grid>
+    )
+    : null
 }
