@@ -13,10 +13,10 @@ import {
   fetchAllMovies, 
   fetchGenres,
   getActiveLocale, 
-  getAllGenres,
   getAllMovies,
-  getFilteredMovies,
   getIsFiltering,
+  getIsSearching,
+  getSearchingInProgress,
   getMoviesFetchingInprogress,
   getMovieCategory,
   setMovieCategory
@@ -39,7 +39,9 @@ class HomePageContainer extends React.Component {
       ||
       movieCategory !== prevProps.movieCategory
     ) {
-      fetchAllMovies(movieCategory, activeLocale.code)
+      if (!isEmpty(movieCategory)) {
+        fetchAllMovies(movieCategory, activeLocale.code)
+      }
     }
 
     if (!isSameLocale) {
@@ -56,12 +58,12 @@ class HomePageContainer extends React.Component {
       setMovieCategory 
     } = this.props
 
-    if (isEmpty(movieCategory)) {
-      await setMovieCategory('popular')
-    }
-
     if (isEmpty(genres)) {
       await fetchGenres(activeLocale.code)
+    }
+
+    if (isEmpty(movieCategory)) {
+      await setMovieCategory('popular')
     }
   }
 
@@ -90,11 +92,11 @@ class HomePageContainer extends React.Component {
 const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   allMovies: getAllMovies(state),
-  filteredMovies: getFilteredMovies(state),
-  genres: getAllGenres(state),
+  isFiltering: getIsFiltering(state),
   isMoviesFetching: getMoviesFetchingInprogress(state),
-  movieCategory: getMovieCategory(state),
-  moviesFiltered: getIsFiltering(state)
+  isSearching: getIsSearching(state),
+  searchingInProgress: getSearchingInProgress(state),
+  movieCategory: getMovieCategory(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
