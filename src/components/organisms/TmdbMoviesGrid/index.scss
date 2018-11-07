@@ -1,0 +1,7 @@
+.tmdb-movies-grid {
+  .tmdb-movie-title {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

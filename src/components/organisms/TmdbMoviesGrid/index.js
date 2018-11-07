@@ -2,7 +2,8 @@ import React from 'react'
 import { 
   Card,
   CardMedia, 
-  Grid 
+  Grid,
+  Typography 
 } from '@material-ui/core' 
 import { isEmpty } from 'lodash-es'
 
@@ -20,6 +21,7 @@ export const TmdbMoviesGrid = ({ allMovies = []}) => {
 
       return (
         <Grid 
+          className="tmdb-movies-grid"
           item 
           key={ id }
           xs={ 12 }
@@ -31,6 +33,10 @@ export const TmdbMoviesGrid = ({ allMovies = []}) => {
               style={{ height: 220 }}
               image={ image }
               title={ title } />
+
+            <Typography className="tmdb-movie-title" component="p">
+              { title }
+            </Typography>
           </Card>
         </Grid>
       )
