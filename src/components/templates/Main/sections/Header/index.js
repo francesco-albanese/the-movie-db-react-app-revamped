@@ -23,7 +23,7 @@ export default class Header extends React.Component {
     )
   }
 
-  renderInput = () => {
+  renderForm = () => {
     return (
       <div className="tmdb-input-search-container">
         <SearchIcon />
@@ -37,7 +37,7 @@ export default class Header extends React.Component {
       <AppBar position="static">
         <Toolbar>
           { this.renderIconButton() }
-          { this.renderInput() }
+          { this.renderForm() }
         </Toolbar>
       </AppBar>
     )
