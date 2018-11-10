@@ -14,6 +14,7 @@ import {
   fetchGenres,
   getActiveLocale, 
   getAllMovies,
+  getAllPages,
   getIsFiltering,
   getIsSearching,
   getSearchingInProgress,
@@ -91,6 +92,7 @@ class HomePageContainer extends React.Component {
 
 const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
+  allPages: getAllPages(state),
   allMovies: getAllMovies(state),
   isFiltering: getIsFiltering(state),
   isMoviesFetching: getMoviesFetchingInprogress(state),

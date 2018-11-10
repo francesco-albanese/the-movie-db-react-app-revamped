@@ -3,7 +3,7 @@ import { TmdbMainMenu } from '#organisms'
 import { TmdbPortal } from '#portals' 
 import Grid from '@material-ui/core/Grid'
 
-import Header from './sections/Header'
+import { TmdbAppBar } from '#organisms'
 
 export default ({ children, isMobile, ...otherProps }) => {
   const { isDynamicPage } = otherProps
@@ -24,8 +24,12 @@ export default ({ children, isMobile, ...otherProps }) => {
 
         {
           isMobile &&
+          !isDynamicPage &&
           <Grid item xs={ 12 }>
-            <Header { ...otherProps } />
+            <TmdbAppBar 
+              isMobile={ isMobile }
+              withBurgerMenu 
+              { ...otherProps } />
           </Grid>
         }
         
