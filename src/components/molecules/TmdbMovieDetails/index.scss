@@ -1,0 +1,13 @@
+.tmdb-movie-details-content-container {
+
+  .tmdb-movie-details-card {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .tmdb-movie-details-title,
+  .tmdb-movie-details-description {
+    color: $text-color;
+  }
+}

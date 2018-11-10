@@ -1,0 +1,16 @@
+.tmdb-movie-details-content-container {
+  padding: 24px;
+  background: $secondary;
+
+  .tmdb-movie-details-card-image-container {
+    box-shadow: none;
+    background: none;
+
+    .tmdb-movie-details-card-image {
+      background-size: contain;
+      margin: auto;
+      width: 500px;
+      height: 500px;
+    }
+  }
+}
