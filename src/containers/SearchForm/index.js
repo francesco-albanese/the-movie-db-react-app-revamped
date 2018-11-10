@@ -1,16 +1,12 @@
 import React from 'react'
-import { 
-  get, 
-  isEmpty, 
-  isFunction 
-} from 'lodash-es'
+import { get, isEmpty } from 'lodash-es'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { decorateClass } from '#utils'
 
 import { RootForm } from '#hoc'
-import { TmdbForm } from '#molecules'
+import { TmdbForm } from '#atoms'
 
 import { fetchMoviesByQuery, getActiveLocale } from '@themoviedb/the-movie-db-store'
 
