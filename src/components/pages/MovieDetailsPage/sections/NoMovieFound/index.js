@@ -2,24 +2,27 @@ import React from 'react'
 import { get, isEmpty } from 'lodash-es'
 import { 
   Button, 
-  Grid, 
-  Paper,
+  Grid,
   Typography 
 } from '@material-ui/core'
 import { Movie } from '@material-ui/icons'
 
 export default class NoMovieFound extends React.Component {
-
-  goBack = () => {
-    const { history, activeLocale } = this.props
-
-    history.push(activeLocale.path)
-  }
   
   render() {
-    const { activeLocale, section } = this.props
+    const { 
+      activeLocale, 
+      goBack,
+      isMobile, 
+      section 
+    } = this.props
+
     const lineOne = get(section, 'lineOne')
     const lineTwo = get(section, 'lineTwo')
+
+    const variant = isMobile 
+      ? 'h4'
+      : 'h2'
 
     return !isEmpty(section) 
       ? (
@@ -27,21 +30,25 @@ export default class NoMovieFound extends React.Component {
           className="tmdb-no-movie-found-section"
           direction="column"
           alignItems="center"
-          justify="center"
           container>
 
           <Grid item>
-            <Paper>
-              <Movie fontSize="large" />
-              
-              <Typography variant="h2">
-                { lineOne[ activeLocale.code ] }
-              </Typography>
+            <Movie className="tmdb-no-movie-icon" fontSize="large" />
+            
+            <Typography 
+              className="tmdb-no-movie-found-text"
+              variant={ variant }
+              align="center">
+              { lineOne[ activeLocale.code ] }
+            </Typography>
 
-              <Button onClick={ this.goBack }>
-                { lineTwo[ activeLocale.code ] }
-              </Button>
-            </Paper>
+            <Button 
+              className="tmdb-go-back-button"
+              onClick={ goBack }
+              size="large"
+              variant="outlined">
+              { lineTwo[ activeLocale.code ] }
+            </Button>
           </Grid>
 
         </Grid>

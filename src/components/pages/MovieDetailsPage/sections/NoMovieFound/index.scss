@@ -1,0 +1,27 @@
+.tmdb-no-movie-found-section {
+  background-color: $secondary;
+  height: 100vh;
+
+  .tmdb-no-movie-icon {
+    font-size: 8em;
+    color: $text-color;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .tmdb-no-movie-found-text {
+    color: $text-color;
+  }
+
+  .tmdb-go-back-button {
+    display: flex;
+    margin: 24px auto 0;
+    background-color: $text-color;
+    color: $primary;
+
+    &:hover {
+      background-color: $primary;
+      color: $text-color;
+    }
+  }
+}
