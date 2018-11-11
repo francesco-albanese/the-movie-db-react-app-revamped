@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Grid } from '@material-ui/core'
-import { get, isFunction } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 import classcat from 'classcat'
 
 export default class TmdbLanguageSelector extends React.Component {

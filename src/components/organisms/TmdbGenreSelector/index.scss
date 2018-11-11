@@ -1,6 +1,6 @@
 .tmdb-genre-selector-container {
   padding-left: 16px;
-  
+
   .tmdb-genre-selector-form-control {
     min-width: 180px;
 
@@ -11,7 +11,7 @@
 
   .tmdb-genre-selector-select {
     color: $text-color;
-    
+
     &::before {
       border-bottom-color: $text-color !important;
     }
@@ -24,5 +24,4 @@
       border-bottom-color: $tertiary !important;
     }
   }
-  
 }

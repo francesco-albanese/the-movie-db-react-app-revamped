@@ -10,16 +10,16 @@
   .tmdb-movies-grid-item-poster {
     height: 365px;
     background-size: cover;
-  
+
     @media screen and (min-width: 1550px) {
       height: 285px;
     }
 
-    
+
     @media screen and (min-width: 961px) {
       height: 285px;
     }
-    
+
     @media screen and (min-width: $LG) {
       height: 215px;
     }
