@@ -14,3 +14,26 @@
     }
   }
 }
+
+.tmdb-movie-details-with-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 450px;
+  padding: 24px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(black, 0.4);
+  }
+
+  > div {
+    z-index: 1;
+  }
+}

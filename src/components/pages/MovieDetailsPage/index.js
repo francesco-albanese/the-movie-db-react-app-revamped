@@ -241,20 +241,65 @@ export default class MovieDetailsPage extends React.Component {
           style={{ backgroundImage: `url(${ background })` }}
           alignItems="center">
           
-          <Grid item xs={ 4 }>
+          <Grid 
+            item 
+            xs={ 12 } 
+            sm={ 4 }>
             { this.renderCard() }
           </Grid>
 
-          <Grid item xs={ 8 }>
-            { this.renderTitle() }
-            { this.renderReleaseDate() }
-            { this.renderRating() }
-            { this.renderRuntime() }
+          <Grid 
+            item
+            sm={ 8 } 
+            xs={ 12 }>
+            <Grid 
+              container
+              justify="center">
+
+              <Grid 
+                item 
+                sm={ 6 }
+                xs={ 6 }>
+                { this.renderTitle() }
+              </Grid>
+
+              <Grid 
+                item 
+                sm={ 6 }
+                xs={ 6 }>
+                { this.renderReleaseDate() }
+              </Grid>
+
+            </Grid>
+
+            <Grid 
+              container
+              justify="center" 
+              wrap="nowrap">
+
+              <Grid 
+                item 
+                sm={ 6 }
+                xs={ 6 }>
+                { this.renderRating() }
+              </Grid>
+
+              <Grid 
+                item 
+                sm={ 6 }
+                xs={ 6 }>
+                { this.renderRuntime() }
+              </Grid>
+
+            </Grid>
           </Grid>
         </Grid>
 
         <Grid container>
-          <Grid item xs>
+          <Grid 
+            className="tmdb-movie-details-mobile-overview-container"
+            item 
+            xs>
             { this.renderDescription() }
             { this.renderGenres() }
           </Grid>        

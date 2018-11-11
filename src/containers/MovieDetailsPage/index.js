@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash-es'
+import withWidth from '@material-ui/core/withWidth'
 
 import { decorateClass } from '#utils'
 import { RootPage } from '#FAC'
@@ -60,5 +61,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 export default decorateClass([
+  withWidth(),
   connect(mapStateToProps, mapDispatchToProps)
 ], MovieDetailsPageContainer)

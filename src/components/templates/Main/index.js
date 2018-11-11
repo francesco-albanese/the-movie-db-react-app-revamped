@@ -35,7 +35,11 @@ export default ({ children, isMobile, ...otherProps }) => {
         
         <TmdbPortal />
 
-        <Grid item xs={ 12 } md={ articleGridSize }>
+        <Grid
+          className="tmdb-page-container" 
+          item 
+          xs={ 12 } 
+          md={ articleGridSize }>
           <article className="tmdb-page">{ children }</article>
         </Grid>
       </Grid>

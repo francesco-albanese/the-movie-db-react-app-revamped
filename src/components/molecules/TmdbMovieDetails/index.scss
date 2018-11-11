@@ -1,4 +1,5 @@
-.tmdb-movie-details-content-container {
+.tmdb-movie-details-content-container,
+.tmdb-movie-details-content-container--mobile {
   .tmdb-movie-details-card {
     background-color: transparent;
     border-radius: 0;
@@ -9,4 +10,22 @@
   .tmdb-movie-details-description {
     color: $text-color;
   }
+}
+
+.tmdb-movie-details-content-container--mobile {
+  .tmdb-movie-details-card-image-container {
+    width: 200px;
+    margin: auto;
+  }
+
+  .tmdb-movie-details-card-image {
+    height: 300px;
+  }
+
+  .tmdb-movie-details-mobile-overview-container {
+    .tmdb-movie-details-card {
+      background-color: $secondary;
+    }
+  }
+
 }
