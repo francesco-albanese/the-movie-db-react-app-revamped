@@ -13,11 +13,14 @@ export default ({ children, isMobile, ...otherProps }) => {
 
   return (
     <main className="tmdb-app-template-container">
-      <Grid container spacing={ 16 }>
+      <Grid container>
         { 
           !isMobile && 
           !isDynamicPage &&
-            <Grid item md={ 3 }>
+            <Grid
+              className="tmdb-main-menu-container"
+              item 
+              md={ 3 }>
               <TmdbMainMenu { ...otherProps } isMobile={ isMobile } />
             </Grid> 
         }

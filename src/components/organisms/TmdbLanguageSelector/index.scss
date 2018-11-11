@@ -1,0 +1,13 @@
+.tmdb-language-selector-container {
+  margin-top: 16px;
+
+  .tmdb-language-button {
+    font-size: 2em;
+    border-radius: 0;
+    padding-bottom: 0;
+
+    &.tmdb-language-button-active {
+      border-bottom: 1px solid $tertiary;
+    }
+  }
+}

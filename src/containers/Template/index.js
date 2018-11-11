@@ -11,8 +11,7 @@ import { portalNames } from '#portals/TmdbPortal/portals.config'
 import { 
   filterMoviesById,
   getActiveLocale, 
-  getActivePage, 
-  getAllGenres,
+  getActivePage,
   getAllLocales,
   getMovieCategory,
   openPortal,
@@ -77,7 +76,6 @@ const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   activePage: getActivePage(state),
   allLocales: getAllLocales(state),
-  genres: getAllGenres(state),
   movieCategory: getMovieCategory(state)
 })
 

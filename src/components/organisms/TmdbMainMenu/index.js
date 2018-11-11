@@ -5,16 +5,12 @@ import { MenuList } from '@material-ui/core'
 import classcat from 'classcat'
 
 import { TmdbMenuItem } from '#molecules'
-import { TmdbLanguageSelector, TmdbGenreSelector } from '#organisms'
+import { TmdbLanguageSelector } from '#organisms'
 
 import logoDesktop from '#assets/logo-desktop.svg'
 import logoMobile from '#assets/logo-mobile.svg'
 
 export default class TmdbMainMenu extends React.Component {
-
-  state = {
-    clearSelectedFilter: false
-  }
 
   renderHomeMenuItem = () => {
 
@@ -54,14 +50,6 @@ export default class TmdbMainMenu extends React.Component {
     )
   }
 
-  clearSelectedFilter = () => {
-    this.setState({ clearSelectedFilter: true })
-  }
-
-  onSelectChange = () => {
-    this.setState({ clearSelectedFilter: false })
-  }
-
   renderMenuItems = () => {
 
     const { allLocales, sections } = this.props
@@ -78,7 +66,6 @@ export default class TmdbMainMenu extends React.Component {
         <TmdbMenuItem 
           { ...this.props } 
           key={ key }
-          onClick={ this.clearSelectedFilter } 
           section={ section } />
       )
     })
@@ -108,26 +95,11 @@ export default class TmdbMainMenu extends React.Component {
     )
   }
 
-  renderGenresSelector = () => {
-    const { sections } = this.props
-    const FilterByGenreSelectorSection = get(sections, 'FilterByGenreSelector.FilterByGenreText')
-    const { clearSelectedFilter } = this.state
-
-    return (
-      <TmdbGenreSelector 
-        { ...this.props }
-        clearSelectedFilter={ clearSelectedFilter }
-        onSelectChange={ this.onSelectChange }
-        section={ FilterByGenreSelectorSection } />
-    )
-  }
-
   render() {
 
     const { 
       props, 
       renderFavouritesMenuItem,
-      renderGenresSelector,
       renderHomeMenuItem,
       renderLanguageSelector,
       renderLogo,
@@ -154,7 +126,10 @@ export default class TmdbMainMenu extends React.Component {
               renderHomeMenuItem()
             }
 
-            { renderMenuItems() }
+            { 
+              !isFavouritePage &&
+              renderMenuItems() 
+            }
 
             {
               !isFavouritePage &&
@@ -163,8 +138,6 @@ export default class TmdbMainMenu extends React.Component {
           </MenuList>
 
           { renderLanguageSelector() }
-
-          { renderGenresSelector() }
 
           { renderLogo() }
         </div>

@@ -7,59 +7,117 @@ import {
   MenuItem
 } from '@material-ui/core'
 import * as Icons from '@material-ui/icons'
+import classcat from 'classcat'
 
-export const TmdbMenuItem = ({ 
-  activeLocale, 
-  allLocales, 
-  asLink,
-  closeMainMenuPortal,
-  onClick, 
-  section,
-  setMovieCategory 
-}) => {
+export default class TmdbMenuItem extends React.Component {
 
-  const { 
-    name,
-    icon, 
-    label, 
-    path 
-  } = section
-  
-  const defaultLocale = allLocales.find(locale => locale.default)
-  const Icon = Icons[ icon[ defaultLocale.code ] ]
+  closePortal = () => {
+    const { closeMainMenuPortal } = this.props
 
-  const closePortal = () => {
     isFunction(closeMainMenuPortal) && closeMainMenuPortal()
   }
 
-  const handleClick = () => {
+  handleClick = name => {
+    const { 
+      closeMainMenuPortal,
+      onClick,
+      setMovieCategory
+    } = this.props
+
     isFunction(onClick) && onClick()
     isFunction(closeMainMenuPortal) && closeMainMenuPortal()
     isFunction(setMovieCategory) && setMovieCategory(camelCase(name[ 'en' ]))
   }
 
-  return asLink 
-    ? (
-      <NavLink 
+  renderIcon = () => {
+    const { allLocales, section } = this.props
+
+    const { icon } = section
+    const defaultLocale = allLocales.find(locale => locale.default)
+    const Icon = Icons[ icon[ defaultLocale.code ] ]
+
+    return {
+      Icon
+    }
+  }
+  
+  renderLinkMenuItem = () => {
+
+    const { 
+      activeLocale, 
+      asLink, 
+      section 
+    } = this.props
+
+    const { Icon } = this.renderIcon()
+
+    const { 
+      label, 
+      path 
+    } = section
+
+    const classes = classcat([ 
+      'tmdb-menu-item', 
+      { 'tmdb-menu-item-as-link': asLink }
+    ])
+
+    return (
+      <NavLink
+        className={ classes } 
         exact 
         to={ path[ activeLocale.code ] }
-        onClick={ closePortal }>
+        onClick={ this.closePortal }>
         <MenuItem>
           <ListItemIcon>
-            <Icon></Icon>
+            <Icon className="tmdb-menu-item-icon"></Icon>
           </ListItemIcon>
 
-          <ListItemText inset primary={ label[ activeLocale.code ] } />
+          <ListItemText
+            className="tmdb-menu-item-label" 
+            inset 
+            primary={ label[ activeLocale.code ] } />
         </MenuItem>
       </NavLink>
     )
-    : (
-      <MenuItem onClick={ handleClick }>
+  }
+
+  renderMenuItem = () => {
+    const { 
+      activeLocale, 
+      movieCategory,
+      section 
+    } = this.props
+
+    const { name, label } = section
+    const { Icon } = this.renderIcon()
+
+    const classes = classcat([ 
+      'tmdb-menu-item',
+      {
+        'tmdb-menu-item-active': movieCategory === camelCase(name[ 'en' ])
+      }
+    ])
+
+    return (
+      <MenuItem className={ classes } onClick={ () => this.handleClick(name) }>
         <ListItemIcon>
-          <Icon></Icon>
+          <Icon className="tmdb-menu-item-icon"></Icon>
         </ListItemIcon>
 
-        <ListItemText inset primary={ label[ activeLocale.code ] } />
+        <ListItemText
+          className="tmdb-menu-item-label" 
+          inset 
+          primary={ label[ activeLocale.code ] } />
       </MenuItem>
     )
+  }
+
+  render() {
+    const { asLink } = this.props
+    return asLink 
+      ? (
+        this.renderLinkMenuItem()
+      )
+      : this.renderMenuItem()
+  }
 }

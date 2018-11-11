@@ -11,8 +11,11 @@ import { Link } from 'react-router-dom'
 export const TmdbMoviesGrid = ({ 
   allMovies = [], 
   activeLocale = {}, 
-  allPages = []
+  allPages = [],
+  width
 }) => {
+
+  console.log(width)
 
   const movieDetailsPage = allPages.find(({ reference }) => reference.includes('movie-details-page'))
   const path = movieDetailsPage.paths[ activeLocale.code ]
@@ -31,24 +34,26 @@ export const TmdbMoviesGrid = ({
 
       return (
         <Grid 
-          className="tmdb-movies-grid"
+          className="tmdb-movies-grid-item"
           item 
           key={ id }
-          xs={ 3 }
+          xs={ 6 }
+          sm={ 4 }
           md={ 3 }
-          lg={ 2 }>
+          lg={ 2 }
+          xl={ 2 }>
 
           <Link to={ to }>
-            <Card>
+            <Card className="tmdb-movies-grid-item-card">
               <CardMedia
                 alt={ title }
-                style={{ height: 220 }}
+                className="tmdb-movies-grid-item-poster"
                 image={ image }
                 title={ title } />
 
               <Typography 
                 className="tmdb-movie-title" 
-                component="p"
+                variant="body1"
                 noWrap>
                 { title }
               </Typography>
@@ -60,11 +65,17 @@ export const TmdbMoviesGrid = ({
     })
   }
 
+  const spacing = width === 'xs' || width === 'sm'
+    ? 8
+    : 32
+
   return !isEmpty(allMovies)
     ? (
-      <Grid container spacing={ 16 }>
-        { renderGridItems() }
-      </Grid>
+      <div className="tmdb-movies-grid-container">
+        <Grid container spacing={ spacing }>
+          { renderGridItems() }
+        </Grid>
+      </div>
     )
     : null
 }

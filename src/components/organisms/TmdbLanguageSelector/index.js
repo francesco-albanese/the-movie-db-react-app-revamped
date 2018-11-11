@@ -1,18 +1,12 @@
 import React from 'react'
-import { 
-  Button, 
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select
-} from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import { get, isFunction } from 'lodash-es'
+import classcat from 'classcat'
 
 export default class TmdbLanguageSelector extends React.Component {
 
   state = {
     activeLocale: {},
-    open: false,
     language: this.props.activeLocale.code
   }
 
@@ -21,119 +15,76 @@ export default class TmdbLanguageSelector extends React.Component {
 
     if (activeLocale.code !== prevState.activeLocale.code) {
       return {
+        activeLocale,
         language: activeLocale.code
       }
     }
 
     return null
   }
-  
 
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
-
-  handleClose = () => {
-    this.setState({ open: false })
-  }
-
-  handleChange = event => {
+  handleClick = code => {
     const { 
       allLocales, 
       closeMainMenuPortal, 
       setActiveLocale 
     } = this.props
 
-    this.setState({ [ event.target.name ]: event.target.value }, () => {
-      if (isFunction(setActiveLocale)) {
-        const locale = allLocales.find(locale => 
-          locale.code.includes(event.target.value)
-        )
-        setActiveLocale(locale)
-      }
+    if (isFunction(setActiveLocale)) {
+      const locale = allLocales.find(locale => 
+        locale.code.includes(code)
+      )
+      setActiveLocale(locale)
+    }
 
-      if (isFunction(closeMainMenuPortal)) {
-        closeMainMenuPortal()
-      }
-    })
+    if (isFunction(closeMainMenuPortal)) {
+      closeMainMenuPortal()
+    }
   }
 
-  renderButton = () => {
-    const { activeLocale, section } = this.props
-    const lineOne = get(section, 'lineOne')
-
-    return (
-      <Button onClick={ this.handleOpen }>
-        { lineOne[ activeLocale.code ] }
-      </Button>
-    )
-  }
-
-  renderInputLabel = () => {
-    const { activeLocale, section } = this.props
-    const lineTwo = get(section, 'lineTwo')
-
-    return (
-      <InputLabel htmlFor="controlled-open-select">
-        { lineTwo[ activeLocale.code ] }
-      </InputLabel>
-    )
-  }
-
-  renderSelect = () => {
-    const { open, language } = this.state
-
-    return (
-      <Select
-        open={ open }
-        onClose={ this.handleClose }
-        onOpen={ this.handleOpen }
-        value={ language }
-        onChange={ this.handleChange }
-        inputProps={{
-          name: 'language',
-          id: 'controlled-open-select'
-        }}>
-        { this.renderMenuItems() }
-      </Select>
-    )
-  }
-
-  renderMenuItems = () => {
+  renderItems = () => {
     const { allLocales } = this.props
+    const { language } = this.state
 
     return allLocales.map(({ code }) => {
       
       const label = code.includes('en')
-        ? `🇬🇧 ${ code.toUpperCase() }`
-        : `🇮🇹 ${ code.toUpperCase() }`
+        ? `🇬🇧`
+        : `🇮🇹`
+
+      const classes = classcat([ 
+        'tmdb-language-button', 
+        { 
+          'tmdb-language-button-active': language === code
+        } 
+      ])
 
       return (
-        <MenuItem key={ code } value={ code }>
-          { label }
-        </MenuItem>
+        <Grid 
+          item
+          key={ code }>
+          <Button 
+            className={ classes } 
+            onClick={ () => this.handleClick(code) }
+            size="small">
+            { label }
+          </Button>
+        </Grid>
       )
     })
-  }
-
-  renderFormControl = () => {
-    return (
-      <FormControl>
-        { this.renderInputLabel() }
-        { this.renderSelect() }
-      </FormControl>
-    )
   }
 
   render() {
 
     return (
-      <form autoComplete="off">
-        <FormControl>
-          { this.renderButton() }
-          { this.renderFormControl() }
-        </FormControl>
-      </form>
+      <Grid 
+        className="tmdb-language-selector-container"
+        justify="center" 
+        container>
+
+        { this.renderItems() }
+
+      </Grid>
     )
   }
 }

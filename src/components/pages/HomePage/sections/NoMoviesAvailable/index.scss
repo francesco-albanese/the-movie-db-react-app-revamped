@@ -1,0 +1,20 @@
+.tmdb-no-movies-available {
+  height: 100vh;
+
+  & &-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $text-color;
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  & &-icon {
+    font-size: 3em;
+    color: $text-color;
+    margin: 0 auto;
+    display: block;
+  }
+}

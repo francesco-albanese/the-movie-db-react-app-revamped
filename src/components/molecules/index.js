@@ -1,2 +1,2 @@
-export { TmdbMenuItem } from './TmdbMenuItem'
+export { default as TmdbMenuItem } from './TmdbMenuItem'
 export { TmdbMovieDetails } from './TmdbMovieDetails'

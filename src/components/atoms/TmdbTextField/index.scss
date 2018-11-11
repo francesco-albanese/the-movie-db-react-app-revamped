@@ -1,0 +1,13 @@
+.tmdb-text-field {
+  > div {
+    color: $text-color;
+
+    &::before {
+      border-bottom-color: $text-color !important;
+    }
+
+    &::after {
+      border-bottom-color: $tertiary;
+    }
+  }
+}

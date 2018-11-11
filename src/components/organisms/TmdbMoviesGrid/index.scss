@@ -1,0 +1,47 @@
+.tmdb-movies-grid-container {
+  padding: 16px;
+
+  .tmdb-movies-grid-item {
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .tmdb-movies-grid-item-poster {
+    height: 365px;
+    background-size: cover;
+  
+    @media screen and (min-width: 1550px) {
+      height: 285px;
+    }
+
+    
+    @media screen and (min-width: 961px) {
+      height: 285px;
+    }
+    
+    @media screen and (min-width: $LG) {
+      height: 215px;
+    }
+
+    @media screen and (max-width: $MD) {
+      height: 435px;
+    }
+
+    @media screen and (max-width: 800px) {
+      height: 345px;
+    }
+
+    @media screen and (max-width: $SM) {
+      height: 425px;
+    }
+
+    @media screen and (max-width: 500px) {
+      height: 325px;
+    }
+
+    @media screen and (max-width: 420px) {
+      height: 235px;
+    }
+  }
+}
