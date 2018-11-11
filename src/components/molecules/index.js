@@ -1,2 +1,2 @@
 export { TmdbMenuItem } from './TmdbMenuItem'
-export { default as TmdbForm } from './TmdbForm'
+export { TmdbMovieDetails } from './TmdbMovieDetails'

@@ -147,8 +147,6 @@ export default class TmdbMainMenu extends React.Component {
     return !isEmpty(sections) && !isEmpty(activePage)
       ? (
         <div className="tmdb-main-menu">
-          
-          { renderLogo() }
 
           <MenuList>
             {
@@ -167,6 +165,8 @@ export default class TmdbMainMenu extends React.Component {
           { renderLanguageSelector() }
 
           { renderGenresSelector() }
+
+          { renderLogo() }
         </div>
       )
       : null

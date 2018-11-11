@@ -14,6 +14,7 @@ import {
   getActivePage, 
   getAllGenres,
   getAllLocales,
+  getMovieCategory,
   openPortal,
   setMovieCategory
 } from '@themoviedb/the-movie-db-store'
@@ -76,7 +77,8 @@ const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   activePage: getActivePage(state),
   allLocales: getAllLocales(state),
-  genres: getAllGenres(state)
+  genres: getAllGenres(state),
+  movieCategory: getMovieCategory(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
