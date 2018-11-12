@@ -67,7 +67,7 @@ export const TmdbMoviesGrid = ({
 
   const spacing = width === 'xs' || width === 'sm'
     ? 8
-    : 32
+    : 16
 
   return !isEmpty(allMovies)
     ? (

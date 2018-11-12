@@ -1,6 +1,10 @@
 .tmdb-genre-selector-container {
   padding-left: 16px;
 
+  @media screen and (max-width: $SM) {
+    margin-top: 16px;
+  }
+
   .tmdb-genre-selector-form-control {
     min-width: 180px;
 
