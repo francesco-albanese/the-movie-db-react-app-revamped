@@ -5,6 +5,15 @@
     a {
       text-decoration: none;
     }
+
+    .tmdb-movies-grid-item-card {
+      background: none;
+      box-shadow: none;
+    }
+
+    .tmdb-movie-title {
+      color: $text-color;
+    }
   }
 
   .tmdb-movies-grid-item-poster {
