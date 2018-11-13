@@ -1,6 +1,5 @@
 import React from 'react'
-import { 
-  Button, 
+import {
   FormControl,
   InputLabel,
   MenuItem,
@@ -8,9 +7,12 @@ import {
 } from '@material-ui/core'
 import { 
   get, 
+  isEmpty,
   isNumber,
   isFunction 
 } from 'lodash-es'
+
+import { TmdbForm } from '#atoms'
 
 export default class TmdbGenreSelector extends React.Component {
 
@@ -20,12 +22,12 @@ export default class TmdbGenreSelector extends React.Component {
   }
   
   componentDidUpdate(prevProps) {
-    const { clearSelectedFilter } = this.props
+    const { movieCategory } = this.props
 
     if (
-      clearSelectedFilter !== prevProps.clearSelectedFilter
+      movieCategory !== prevProps.movieCategory
       &&
-      clearSelectedFilter
+      !isEmpty(movieCategory)
     ) {
       this.setState({ genre: '' })
     }
@@ -61,31 +63,21 @@ export default class TmdbGenreSelector extends React.Component {
     })
   }
 
-  renderButton = () => {
-    const { activeLocale, section } = this.props
-
-    const lineOne = get(section, 'lineOne')
-
-    return (
-      <Button onClick={ this.handleOpen }>
-        { lineOne[ activeLocale.code ] }
-      </Button>
-    )
-  }
-
   renderInputLabel = () => {
     const { activeLocale, section } = this.props
     const { genre } = this.state
 
-    const lineOne = get(section, 'lineOne')
-    const lineTwo = get(section, 'lineTwo')
+    const lineOne = get(section, 'lineOne', '')
+    const lineTwo = get(section, 'lineTwo', '')
 
     const label = !isNumber(genre)
       ? lineOne[ activeLocale.code ]
       : lineTwo[ activeLocale.code ]
 
     return (
-      <InputLabel htmlFor="controlled-open-select">
+      <InputLabel 
+        className="tmdb-genre-selector-input-label"
+        htmlFor="controlled-open-select">
         { label }
       </InputLabel>
     )
@@ -96,6 +88,7 @@ export default class TmdbGenreSelector extends React.Component {
 
     return (
       <Select
+        className="tmdb-genre-selector-select"
         open={ open }
         onClose={ this.handleClose }
         onOpen={ this.handleOpen }
@@ -116,7 +109,10 @@ export default class TmdbGenreSelector extends React.Component {
     return genres.map(({ id, name }) => {
 
       return (
-        <MenuItem key={ id } value={ id }>
+        <MenuItem 
+          className="tmdb-genre-selector-menu-item"
+          key={ id } 
+          value={ id }>
           { name }
         </MenuItem>
       )
@@ -135,12 +131,11 @@ export default class TmdbGenreSelector extends React.Component {
   render() {
 
     return (
-      <form autoComplete="off">
-        <FormControl>
-          { this.renderButton() }
+      <TmdbForm className="tmdb-genre-selector-container">
+        <FormControl className="tmdb-genre-selector-form-control">
           { this.renderFormControl() }
         </FormControl>
-      </form>
+      </TmdbForm>
     )
   }
 }

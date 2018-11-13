@@ -10,6 +10,7 @@ import { get } from 'lodash-es'
 export default ({ 
   activeLocale = {}, 
   history,
+  isMobile,
   sections = {}
 }) => {
 
@@ -19,22 +20,41 @@ export default ({
   const lineOne = get(sections, 'FourOhFour.FourOhFourText.lineOne')
   const lineTwo = get(sections, 'FourOhFour.FourOhFourText.lineTwo')
 
+  const variant = isMobile 
+    ? 'h4'
+    : 'h2'
+
   return (
     <Grid 
       alignItems="center"
+      className="tmdb-four-oh-four-container"
       container 
-      justify="center">
+      direction="column">
+
       <Grid item xs={ 12 }>
-        <Typography variant="h1">
-          <Error /> 404
+        <Error className="tmdb-four-oh-four-icon" />
+
+        <Typography 
+          align="center"
+          className="tmdb-four-oh-four-text"
+          variant="h1">
+          404
         </Typography>
-        <Typography>
+
+        <Typography
+          align="center"
+          className="tmdb-four-oh-four-text" 
+          variant={ variant }>
           { lineOne[ code ] }
         </Typography>
-        <Button onClick={ () => history.push(path)  }>
+
+        <Button 
+          className="tmdb-four-oh-four-button"
+          onClick={ () => history.push(path)  }>
           { lineTwo[ code ] }
         </Button>
       </Grid>
+
     </Grid>
   )
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash-es'
+import withWidth from '@material-ui/core/withWidth'
 
 import { decorateClass } from '#utils'
 import { RootPage } from '#FAC'
@@ -12,7 +13,9 @@ import HomePage from '#pages/HomePage'
 import { 
   fetchAllMovies, 
   fetchGenres,
+  filterMoviesById,
   getActiveLocale, 
+  getAllGenres,
   getAllMovies,
   getAllPages,
   getIsFiltering,
@@ -94,6 +97,7 @@ const mapStateToProps = state => ({
   activeLocale: getActiveLocale(state),
   allPages: getAllPages(state),
   allMovies: getAllMovies(state),
+  genres: getAllGenres(state),
   isFiltering: getIsFiltering(state),
   isMoviesFetching: getMoviesFetchingInprogress(state),
   isSearching: getIsSearching(state),
@@ -104,10 +108,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllMovies,
   fetchGenres,
+  filterMoviesById,
   setMovieCategory
 }, dispatch)
 
 export default decorateClass([
+  withWidth(),
   connect(mapStateToProps, mapDispatchToProps)
 ], HomePageContainer)
 

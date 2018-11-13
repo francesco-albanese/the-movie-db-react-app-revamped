@@ -7,6 +7,7 @@ import { get, isEmpty } from 'lodash-es'
 export const NoMoviesAvailable = ({ 
   activeLocale, 
   isFiltering,
+  isMobile,
   sections 
 }) => {
 
@@ -15,13 +16,20 @@ export const NoMoviesAvailable = ({
   const text = isFiltering
     ? noGenresLineOne[ activeLocale.code ]
     : noSearchResultsLineOne[ activeLocale.code ]
+  
+  const variant = isMobile
+    ? 'h3'
+    : 'h2'
 
   return !isEmpty(sections) 
     ? (
-      <Typography variant="h2">
-        <LocalMovies />  
-        { text }
-      </Typography>
+      <div className="tmdb-no-movies-available">
+        <Typography className="tmdb-no-movies-available-heading" variant={ variant }>
+          <LocalMovies 
+            className="tmdb-no-movies-available-icon" />   
+          { text }
+        </Typography>
+      </div>
     )
     : null
 }

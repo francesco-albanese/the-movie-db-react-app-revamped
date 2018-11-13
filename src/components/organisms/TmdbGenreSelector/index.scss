@@ -1,0 +1,31 @@
+.tmdb-genre-selector-container {
+  padding-left: 16px;
+
+  @media screen and (max-width: $SM) {
+    margin-top: 16px;
+  }
+
+  .tmdb-genre-selector-form-control {
+    min-width: 180px;
+
+    label {
+      color: $text-color;
+    }
+  }
+
+  .tmdb-genre-selector-select {
+    color: $text-color;
+
+    &::before {
+      border-bottom-color: $text-color !important;
+    }
+
+    svg {
+      color: $text-color;
+    }
+
+    &::after {
+      border-bottom-color: $tertiary !important;
+    }
+  }
+}

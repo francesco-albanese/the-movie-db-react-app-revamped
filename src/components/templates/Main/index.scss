@@ -1,5 +1,13 @@
 .tmdb-app-template-container {
   .tmdb-page-container {
-    padding-bottom: 0 !important;
+    background-color: $secondary;
+    width: calc(100% + 220px);
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .tmdb-main-menu-container {
+    background-color: $primary;
+    max-width: 220px;
   }
 }

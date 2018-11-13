@@ -1,0 +1,26 @@
+.tmdb-four-oh-four-container {
+  height: 100vh;
+
+  .tmdb-four-oh-four-icon {
+    font-size: 8em;
+    color: $text-color;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .tmdb-four-oh-four-text {
+    color: $text-color;
+  }
+
+  .tmdb-four-oh-four-button {
+    display: flex;
+    margin: 24px auto 0;
+    background-color: $text-color;
+    color: $primary;
+
+    &:hover {
+      background-color: $primary;
+      color: $text-color;
+    }
+  }
+}

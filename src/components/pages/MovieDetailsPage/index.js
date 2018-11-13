@@ -337,7 +337,11 @@ export default class MovieDetailsPage extends React.Component {
                   { isMobile && this.renderUiMobile() }
                 </React.Fragment>
               )
-              : <NoMovieFound { ...this.props } section={ NoMovieFoundText } />
+              : <NoMovieFound 
+                { ...this.props }
+                goBack={ this.goBack }
+                isMobile={ isMobile }
+                section={ NoMovieFoundText } />
 
         }
       </Grid>

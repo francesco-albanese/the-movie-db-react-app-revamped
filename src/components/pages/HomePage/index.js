@@ -1,8 +1,9 @@
 import React from 'react'
 import { get, isEmpty } from 'lodash-es'
+import { Grid } from '@material-ui/core'
 
 import { TmdbSpinner } from '#atoms'
-import { TmdbMoviesGrid } from '#organisms'
+import { TmdbMoviesGrid, TmdbGenreSelector } from '#organisms'
 import SearchForm from '#containers/SearchForm'
 import { NoMoviesAvailable } from './sections/NoMoviesAvailable'
 
@@ -12,6 +13,7 @@ export default class HomePage extends React.Component {
     const { 
       allMovies, 
       isFiltering,
+      isMobile,
       searchingInProgress,
       sections 
     } = this.props
@@ -26,6 +28,9 @@ export default class HomePage extends React.Component {
     const NoMoviesWithQuerySection = 
     get(sections, 'NoMoviesWithQuery.NoMoviesWithQueryText')
 
+    const FilterByGenreSelectorSection = 
+      get(sections, 'FilterByGenreSelector.FilterByGenreText')
+
     const NoMoviesAvailableSections = { 
       NoMoviesInSelectedGenreSection,
       NoMoviesWithQuerySection
@@ -33,13 +38,31 @@ export default class HomePage extends React.Component {
 
     return (
       <React.Fragment>
+        <Grid className="tmdb-home-page-forms-container" container>
 
-        <SearchForm { ...this.props } />
+          <Grid 
+            item 
+            xs={ 12 }
+            sm={ 6 }>
+            <SearchForm { ...this.props } />
+          </Grid>
+
+          <Grid 
+            item 
+            xs={ 12 }
+            sm={ 6 }>
+            <TmdbGenreSelector 
+              { ...this.props }
+              section={ FilterByGenreSelectorSection } />
+          </Grid>
+
+        </Grid>
 
         {
           renderNoMoviesAvailable &&
           <NoMoviesAvailable 
-            { ...this.props } 
+            { ...this.props }
+            isMobile={ isMobile } 
             sections={ NoMoviesAvailableSections } />
         }
 

@@ -8,14 +8,22 @@ import { decorateClass } from '#utils'
 import { RootForm } from '#hoc'
 import { TmdbForm } from '#atoms'
 
-import { fetchMoviesByQuery, getActiveLocale } from '@themoviedb/the-movie-db-store'
+import { 
+  fetchMoviesByQuery, 
+  getActiveLocale,
+  getAllPages
+} from '@themoviedb/the-movie-db-store'
 
 class SearchFormContainer extends React.Component {
 
   getFormFields = () => {
-    const { activeLocale, sections } = this.props
+    const { activeLocale, allPages } = this.props
+
+    const HomePage = allPages.find(({ reference }) => reference.includes('home'))
+    const sections = get(HomePage, 'sections')
+    
     const label = 
-      get(sections, 'SearchMovies.SearchMoviesText.lineOne')
+      get(sections, 'SearchMovies.SearchMoviesText.lineOne', '')
 
     return [
       {
@@ -44,7 +52,7 @@ class SearchFormContainer extends React.Component {
 
     return !isEmpty(fields)
       ? (
-        <TmdbForm  { ...this.props }>
+        <TmdbForm className="tmdb-serch-form-container"  { ...this.props }>
           { fields }
         </TmdbForm>
       )
@@ -53,7 +61,8 @@ class SearchFormContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  activeLocale: getActiveLocale(state)
+  activeLocale: getActiveLocale(state),
+  allPages: getAllPages(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

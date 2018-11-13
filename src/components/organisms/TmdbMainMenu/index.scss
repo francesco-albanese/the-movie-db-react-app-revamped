@@ -3,12 +3,33 @@
  */
 
 .tmdb-main-menu {
+  background-color: $primary;
+  position: sticky;
+  top: 0;
+  padding-top: 32px;
+  height: 100vh;
+
+  ul {
+    border-bottom: 1px solid $secondary;
+  }
+
   .tmdb-avatar {
     border-radius: 0;
-    margin: auto;
+    margin: 32px auto;
   }
 
   .tmdb-avatar-desktop {
     width: 100px;
+  }
+
+  .tmdb-menu-item {
+    .tmdb-menu-item-icon,
+    .tmdb-menu-item-label span {
+      color: $text-color;
+    }
+
+    &.tmdb-menu-item-as-link {
+      text-decoration: none;
+    }
   }
 }
