@@ -11,7 +11,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const paths = require('../env/paths')
-const getClientEnvironment = require('../env')
+const getClientEnvironment = require('../env/env')
 const src = '../../src'
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -36,7 +36,7 @@ if (env.stringified[ 'process.env' ].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'static/css/[name].[contenthash:8].css'
+const cssFilename = 'static/css/[name].[md5:contenthash:hex:20].css'
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
