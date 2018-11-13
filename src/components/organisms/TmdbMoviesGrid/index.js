@@ -15,8 +15,6 @@ export const TmdbMoviesGrid = ({
   width
 }) => {
 
-  console.log(width)
-
   const movieDetailsPage = allPages.find(({ reference }) => reference.includes('movie-details-page'))
   const path = movieDetailsPage.paths[ activeLocale.code ]
 
